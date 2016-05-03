@@ -1,30 +1,23 @@
 /**
- * Web Server LED Control 
+ * Web Server Relay Control 
  *  
  * @author Miguel Alvarez 
+ * Updated by CJ Trowbridge
  *  
- * @date    27-FEB-2015 
+ * @date    2-May-2016
  *  
- * @details A sketch that displays an HTML page with three 
+ * @details A sketch that displays an HTML page with seven 
  *          buttons to toggle three digital pins. You may
- *          connect an LED to pins 2,3, and 5 with a 1k
- *          resistor. Then visit the IP address (printed in the
- *          serial window) in a web browser. Tested on this
- *          version of the shield:
- *          http://www.seeedstudio.com/depot/W5200-Ethernet-Shield-p-1577.html
- *  
- *          For more detail instructions and example output see:
- *          http://www.seeedstudio.com/wiki/Ethernet_Shield_V2.4
- *  
- * @circuit Stack the W5200 Ethernet Shield from Seeed Studio on 
- *          the Arduino board. Connect Three leds and 1k
- *          resistors to pins 2, 3, and 5.
+ *          connect an LED to pins 2,3, 5,6,7,8,9 . Then visit the IP 
+ *          address (printed in the serial window) in a web browser. 
+ *          
+ * @circuit Stack the W5200 Ethernet Shield from Seeed Studio
  */
 
 #include <SPI.h>
 #include <EthernetV2_0.h>
  
-int pins[] = {2,3,5}; // the digital pins you want to control. 
+int pins[] = {2,3,5,6,7,8,9}; // the digital pins you want to control. 
 // NOTE: do not attempt to control the pins used by the SPI bus or 0,1, and 4 pins
  
 // define the controller's MAC address
@@ -122,7 +115,7 @@ void loop() {
           client.print("$(\".led\").click(function(){");
           client.print("var p = $(this).attr('id');"); // get id value (i.e. pin13, pin12, or pin11)
  
-          // create the JQuery $.get function "$.get(\"http://ipaddress:port/\", {pin:p},function(data){alert(data)});"
+          // create the JQuery $.get function "$.get(\"http://ipaddress:port/\", {pin:p},function(data){/* alert(data) */});"
           // The .get functions sends and HTTP GET request to the IP address of the shield with the parameter "pin" and value "p", then executes the function alert
           String get = "$.get(\"http://";
           get+=ipAddress;
